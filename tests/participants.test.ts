@@ -1,4 +1,13 @@
+//==============================================================================
+// Copyright Zhiwei Liu. All Rights Reserved.
+// (C) Copyright Zhiwei Liu <zhiwei.liu10@gmail.com> 2024
+// Node module: @zhiweiliu/nz-energy-public-datasets
+// This file is licensed under the MIT License.
+// rLicense text available at https://opensource.org/licenses/MIT
+// =============================================================================
+
 import { ParticipantFields, Participants } from "../src";
+
 test("Load New Zealand EA Market Partificipants", async () => {
   const participants = new Participants();
   const fields = new ParticipantFields();

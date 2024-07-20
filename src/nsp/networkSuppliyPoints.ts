@@ -1,7 +1,15 @@
-import Globals from "../globals";
-import DatasetBase from "../datasetBase";
+//==============================================================================
+// Copyright Zhiwei Liu. All Rights Reserved.
+// (C) Copyright Zhiwei Liu <zhiwei.liu10@gmail.com> 2024
+// Node module: @zhiweiliu/nz-energy-public-datasets
+// This file is licensed under the MIT License.
+// rLicense text available at https://opensource.org/licenses/MIT
+// =============================================================================
+
+import Globals from "../privateUtiliites/globals";
+import DatasetBase from "../privateUtiliites/datasetBase";
 import NetworkSupplyPointFields from "./networkSupplyPointFields";
-import { Field } from "../fieldBase";
+import { Field } from "../privateUtiliites/fieldBase";
 
 export class NetworkSupplyPoint {
   [index: string]: string | number;

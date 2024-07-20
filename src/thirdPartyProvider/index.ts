@@ -7,8 +7,8 @@
 // =============================================================================
 
 export {
-  default as NetworkSupplyPoints,
-  NetworkSupplyPoint,
-  NetworkSupplyPointResponse,
-} from "./networkSuppliyPoints";
-export { default as NetworkSupplyPointFields } from "./networkSupplyPointFields";
+  default as ThirdPartyProviders,
+  ThirdPartyProvider,
+  ThirdPartyProviderField,
+  ThirdPartyProviderResponse,
+} from "./thirdPartyProviders";

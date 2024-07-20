@@ -1,6 +1,14 @@
-import DatasetBase from "../datasetBase";
-import { Field } from "../fieldBase";
-import Globals from "../globals";
+//==============================================================================
+// Copyright Zhiwei Liu. All Rights Reserved.
+// (C) Copyright Zhiwei Liu <zhiwei.liu10@gmail.com> 2024
+// Node module: @zhiweiliu/nz-energy-public-datasets
+// This file is licensed under the MIT License.
+// rLicense text available at https://opensource.org/licenses/MIT
+// =============================================================================
+
+import DatasetBase from "../privateUtiliites/datasetBase";
+import { Field } from "../privateUtiliites/fieldBase";
+import Globals from "../privateUtiliites/globals";
 import { default as ParticipantFields } from "./participantFields";
 
 export class Participant {
