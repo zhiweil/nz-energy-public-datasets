@@ -76,27 +76,17 @@ export default class NetworkSupplyPoints extends DatasetBase {
     return nsp;
   }
 
-  private static getLatestTable(tables: any[]) {
-    let latest = null;
-    for (let t of tables) {
-      if (!latest || Date.parse(latest.text()) < Date.parse(t.text())) {
-        latest = t;
-      }
-    }
-    return latest;
-  }
-
   async loadNetworkSupllyPoints(): Promise<NetworkSupplyPointResponse> {
     const page = await this.crawler.readPage(NetworkSupplyPoints.nspTableUrl);
     const elements = this.crawler.getElementsByTag(
       NetworkSupplyPoints.fileTag,
       page
     );
-    let latest = await NetworkSupplyPoints.getLatestTable(elements);
+
+    let latest = this.crawler.getLatestEmiTable(elements);
     let href = `${Globals.EmiHost}${latest.attr("href")}`;
     let updatedAt = latest.text();
     let jsonArray = await this.crawler.downloadCsv(href);
-    console.log(latest.text());
 
     // ensure the data structure of the original CSV does not change
     this.checkHeaderRow(jsonArray[0] as string[]);

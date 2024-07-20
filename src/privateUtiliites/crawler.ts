@@ -79,4 +79,14 @@ export default class Crawler {
     const csvString = response.data;
     return Papa.parse(csvString).data;
   }
+
+  getLatestEmiTable(tables: any[]) {
+    let latest = null;
+    for (let t of tables) {
+      if (!latest || Date.parse(latest.text()) < Date.parse(t.text())) {
+        latest = t;
+      }
+    }
+    return latest;
+  }
 }

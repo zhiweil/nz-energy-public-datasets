@@ -36,6 +36,10 @@ export default class DatasetBase {
     return (pJson[this.fields.valueByField(field)] ?? "") as string;
   }
 
+  extractNumberByIndex(pJson: any, index: number): number {
+    return Number(this.extractStringByIndex(pJson, index));
+  }
+
   extractStringArray(pJson: any, field: string): string[] {
     let str = this.extractString(pJson, field).trim();
     let arr: string[] = [];
@@ -46,7 +50,7 @@ export default class DatasetBase {
   }
 
   extractStringByIndex(pJson: string[], index: number): string {
-    return (pJson[index] ?? "") as string;
+    return pJson[index] ?? "";
   }
 
   extractBoolean(pJson: any, field: string): boolean {
