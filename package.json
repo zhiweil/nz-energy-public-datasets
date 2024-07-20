@@ -1,0 +1,40 @@
+{
+  "name": "@zhiweiliu/nz-energy-public-datasets",
+  "version": "1.0.0",
+  "description": "The utilities to load public datasets of New Zealand energy market in JSON format. These datasets are hosted by the websites of Electricity Authority, Electricity Market Information, Transpower, and etc.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "jest",
+    "build": "tsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhiweil/nz-energy-public-datasets.git"
+  },
+  "author": "zhiwei.liu19@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zhiweil/nz-energy-public-datasets/issues"
+  },
+  "homepage": "https://github.com/zhiweil/nz-energy-public-datasets#readme",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.2",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.1.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@types/papaparse": "^5.3.14",
+    "axios": "^1.7.2",
+    "cheerio": "^1.0.0-rc.12",
+    "papaparse": "^5.4.1",
+    "xlsx": "^0.18.5"
+  }
+}
