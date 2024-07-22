@@ -24,6 +24,7 @@
   "homepage": "https://github.com/zhiweil/nz-energy-public-datasets#readme",
   "devDependencies": {
     "@types/jest": "^29.5.12",
+    "@types/unzipper": "^0.10.9",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.2",
     "ts-node": "^10.9.2",
@@ -35,6 +36,7 @@
     "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",
     "papaparse": "^5.4.1",
+    "unzipper": "^0.12.2",
     "xlsx": "^0.18.5"
   }
 }

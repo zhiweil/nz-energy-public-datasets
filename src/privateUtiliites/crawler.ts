@@ -11,6 +11,8 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import XLSX from "xlsx";
 import Papa from "papaparse";
+import * as unzipper from "unzipper";
+import * as path from "path";
 
 export default class Crawler {
   async readPage(path: string): Promise<cheerio.CheerioAPI> {
@@ -88,5 +90,52 @@ export default class Crawler {
       }
     }
     return latest;
+  }
+
+  async downloadAndUnzipFile(
+    url: string,
+    downloadPath: string,
+    extractPath: string
+  ): Promise<void> {
+    try {
+      // Download the file
+      const response = await axios({
+        url,
+        method: "GET",
+        responseType: "stream",
+      });
+
+      // Ensure the download directory exists
+      fs.mkdirSync(path.dirname(downloadPath), { recursive: true });
+
+      // Create a write stream to save the downloaded file
+      const writer = fs.createWriteStream(downloadPath);
+
+      // Pipe the response data to the write stream
+      response.data.pipe(writer);
+
+      // Return a promise that resolves when the file is fully written
+      await new Promise<void>((resolve, reject) => {
+        writer.on("finish", resolve);
+        writer.on("error", reject);
+      });
+
+      // Ensure the extract directory exists
+      fs.mkdirSync(extractPath, { recursive: true });
+
+      // Unzip the downloaded file
+      await fs
+        .createReadStream(downloadPath)
+        .pipe(unzipper.Extract({ path: extractPath }))
+        .promise();
+    } catch (error) {
+      console.error("Error downloading or unzipping file:", error);
+    }
+  }
+
+  readJsonFile(filePath: string): any {
+    const absolutePath = path.resolve(filePath);
+    const fileContents = fs.readFileSync(absolutePath, "utf-8");
+    return JSON.parse(fileContents);
   }
 }

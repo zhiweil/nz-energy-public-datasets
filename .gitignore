@@ -6,3 +6,6 @@
 
 # Build files
 /dist
+
+# test result output
+*.test.txt
