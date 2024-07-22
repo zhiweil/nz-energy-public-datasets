@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import { FieldBase } from "../privateUtiliites/fieldBase";
+import { FieldBase } from "../common/fieldBase";
 
 export default class ParticipantFields extends FieldBase {
   constructor() {

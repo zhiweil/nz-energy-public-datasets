@@ -6,9 +6,9 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import DatasetBase from "../privateUtiliites/datasetBase";
-import { FieldBase } from "../privateUtiliites/fieldBase";
-import Globals from "../privateUtiliites/globals";
+import DatasetBase from "../common/datasetBase";
+import { FieldBase } from "../common/fieldBase";
+import Globals from "../common/globals";
 
 export class ThirdPartyProviderField extends FieldBase {
   constructor() {

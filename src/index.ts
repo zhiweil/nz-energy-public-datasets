@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-export { Field, FieldBase } from "./privateUtiliites/fieldBase";
+export { Field, FieldBase } from "./common/fieldBase";
 export {
   Participants,
   Participant,

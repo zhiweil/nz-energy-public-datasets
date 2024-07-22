@@ -1,7 +1,6 @@
-import { get } from "cheerio/lib/api/traversing";
-import DatasetBase from "../privateUtiliites/datasetBase";
-import { FieldBase } from "../privateUtiliites/fieldBase";
-import Globals from "../privateUtiliites/globals";
+import DatasetBase from "../common/datasetBase";
+import { FieldBase } from "../common/fieldBase";
+import Globals from "../common/globals";
 
 export enum NetworkRegionShapeFileType {
   WGS84_GeoJSON_NRR = "WGS84_GeoJSON_NRR",

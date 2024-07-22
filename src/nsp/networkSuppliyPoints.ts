@@ -6,10 +6,10 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import Globals from "../privateUtiliites/globals";
-import DatasetBase from "../privateUtiliites/datasetBase";
+import Globals from "../common/globals";
+import DatasetBase from "../common/datasetBase";
 import NetworkSupplyPointFields from "./networkSupplyPointFields";
-import { Field } from "../privateUtiliites/fieldBase";
+import { Field } from "../common/fieldBase";
 
 export class NetworkSupplyPoint {
   [index: string]: string | number;

@@ -6,9 +6,9 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import DatasetBase from "../privateUtiliites/datasetBase";
-import { Field } from "../privateUtiliites/fieldBase";
-import Globals from "../privateUtiliites/globals";
+import DatasetBase from "../common/datasetBase";
+import { Field } from "../common/fieldBase";
+import Globals from "../common/globals";
 import { default as ParticipantFields } from "./participantFields";
 
 export class Participant {

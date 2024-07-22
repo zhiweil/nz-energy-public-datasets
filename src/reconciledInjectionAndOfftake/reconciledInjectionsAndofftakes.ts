@@ -1,6 +1,6 @@
-import DatasetBase from "../privateUtiliites/datasetBase";
-import { FieldBase } from "../privateUtiliites/fieldBase";
-import Globals from "../privateUtiliites/globals";
+import DatasetBase from "../common/datasetBase";
+import { FieldBase } from "../common/fieldBase";
+import Globals from "../common/globals";
 
 export class ReconciledInjectionsAndOfftakesFields extends FieldBase {
   constructor() {
@@ -57,10 +57,13 @@ export default class ReconciledInjectionsAndOfftakes extends DatasetBase {
     let fileTags = this.crawler.getElementsByTag("tr td a", page);
 
     for (let i = 0; i < fileTags.length; i += 3) {
-      files.push({
-        file: fileTags[i].text().trim(),
-        updatedAt: fileTags[i + 1].text().trim(),
-      });
+      let fn = fileTags[i].text().trim();
+      if (fn.endsWith(".csv.gz")) {
+        files.push({
+          file: fileTags[i].text().trim(),
+          updatedAt: fileTags[i + 1].text().trim(),
+        });
+      }
     }
 
     return files;
