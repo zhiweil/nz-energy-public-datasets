@@ -127,7 +127,8 @@ export default class NetworkRegionShapefiles extends DatasetBase {
   }
 
   async loadShapefile(
-    fileType: NetworkRegionShapeFileType
+    fileType: NetworkRegionShapeFileType,
+    localPath: string
   ): Promise<NetworkRegionShapeFileResponse> {
     let metaDdata = await this.loadShapefileMetadata(fileType);
     if (
@@ -138,8 +139,8 @@ export default class NetworkRegionShapefiles extends DatasetBase {
     }
 
     const path = this.getFilePath(fileType);
-    const downloadPath = `/tmp/${fileType}/zip`;
-    const extractPath = `/tmp/${fileType}/json`;
+    const downloadPath = `${localPath}/${fileType}/zip`;
+    const extractPath = `${localPath}/${fileType}/json`;
     await this.crawler.downloadAndUnzipFile(
       `${path}/${fileType}.zip`,
       downloadPath,

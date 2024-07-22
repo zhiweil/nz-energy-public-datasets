@@ -13,6 +13,7 @@ import XLSX from "xlsx";
 import Papa from "papaparse";
 import * as unzipper from "unzipper";
 import * as path from "path";
+import * as zlib from "zlib";
 
 export default class Crawler {
   async readPage(path: string): Promise<cheerio.CheerioAPI> {
@@ -137,5 +138,57 @@ export default class Crawler {
     const absolutePath = path.resolve(filePath);
     const fileContents = fs.readFileSync(absolutePath, "utf-8");
     return JSON.parse(fileContents);
+  }
+
+  readCsvFile(filePath: string): any {
+    const absolutePath = path.resolve(filePath);
+    const fileContents = fs.readFileSync(absolutePath, "utf-8");
+    return Papa.parse(fileContents).data;
+  }
+
+  // Function to download a file
+  async downloadFile(url: string, outputPath: string): Promise<void> {
+    // Ensure the download directory exists
+    fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+
+    const writer = fs.createWriteStream(outputPath);
+    const response = await axios.get(url, {
+      responseType: "stream",
+    });
+
+    response.data.pipe(writer);
+
+    return new Promise((resolve, reject) => {
+      writer.on("finish", resolve);
+      writer.on("error", reject);
+    });
+  }
+
+  // Function to decompress a .csv.gz file
+  async decompressCsvGzFile(
+    gzFilePath: string,
+    outputFilePath: string
+  ): Promise<void> {
+    const absoluteGzFilePath = path.resolve(gzFilePath);
+    const absoluteOutputFilePath = path.resolve(outputFilePath);
+
+    const readStream = fs.createReadStream(absoluteGzFilePath);
+    const writeStream = fs.createWriteStream(absoluteOutputFilePath);
+    const gunzip = zlib.createGunzip();
+
+    await readStream.pipe(gunzip).pipe(writeStream);
+  }
+
+  deleteFolderRecursively(folderPath: string): void {
+    const absoluteFolderPath = path.resolve(folderPath);
+
+    // Check if the folder exists
+    if (fs.existsSync(absoluteFolderPath)) {
+      // Delete the folder and its contents recursively
+      fs.rmSync(absoluteFolderPath, { recursive: true, force: true });
+      console.log(`Folder deleted: ${absoluteFolderPath}`);
+    } else {
+      console.log(`Folder not found: ${absoluteFolderPath}`);
+    }
   }
 }

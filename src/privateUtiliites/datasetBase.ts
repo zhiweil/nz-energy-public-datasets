@@ -60,4 +60,8 @@ export default class DatasetBase {
       ).toUpperCase() === "X"
     );
   }
+
+  deleteFolderRecursively(path: string) {
+    this.crawler.deleteFolderRecursively(path);
+  }
 }

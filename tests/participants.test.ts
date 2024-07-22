@@ -12,7 +12,7 @@ test("Load New Zealand EA Market Partificipants", async () => {
   const participants = new Participants();
   const fields = new ParticipantFields();
 
-  const ps = await participants.loadPartificipants();
+  const ps = await participants.loadPartificipants("/tmp");
   expect(ps.fields.length).toBe(fields.Fields.length);
   expect(ps.participants.length).toBeGreaterThan(0);
   expect(ps.codes.length).toBeGreaterThan(0);

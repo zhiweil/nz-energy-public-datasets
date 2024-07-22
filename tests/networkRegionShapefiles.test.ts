@@ -6,7 +6,8 @@ test("Load WGS84 NRR GeoJSON", async () => {
   let ts = Date.now();
   let nrs = new NetworkRegionShapefiles();
   let nrss = await nrs.loadShapefile(
-    NetworkRegionShapeFileType.WGS84_GeoJSON_NRR
+    NetworkRegionShapeFileType.WGS84_GeoJSON_NRR,
+    "/tmp"
   );
 
   // ensure top-level fields are populated correctly
@@ -49,7 +50,8 @@ test("Load WGS84 Zone GeoJSON", async () => {
   let ts = Date.now();
   let zone = new NetworkRegionShapefiles();
   let zones = await zone.loadShapefile(
-    NetworkRegionShapeFileType.WGS84_GeoJSON_Zone
+    NetworkRegionShapeFileType.WGS84_GeoJSON_Zone,
+    "/tmp"
   );
 
   // ensure top-level fields are populated correctly
@@ -94,7 +96,8 @@ test("Load NZTM NRR GeoJSON", async () => {
   let ts = Date.now();
   let nrs = new NetworkRegionShapefiles();
   let nrss = await nrs.loadShapefile(
-    NetworkRegionShapeFileType.NZTM_GeoJSON_NRR
+    NetworkRegionShapeFileType.NZTM_GeoJSON_NRR,
+    "/tmp"
   );
 
   // ensure top-level fields are populated correctly
@@ -135,7 +138,8 @@ test("Load NZTM Zone GeoJSON", async () => {
   let ts = Date.now();
   let zone = new NetworkRegionShapefiles();
   let zones = await zone.loadShapefile(
-    NetworkRegionShapeFileType.NZTM_GeoJSON_Zone
+    NetworkRegionShapeFileType.NZTM_GeoJSON_Zone,
+    "/tmp"
   );
 
   // ensure top-level fields are populated correctly

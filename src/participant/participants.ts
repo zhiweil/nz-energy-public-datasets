@@ -57,7 +57,7 @@ export interface ParticipantReponse {
 
 export default class Participants extends DatasetBase {
   private participantsUrl = `${Globals.EaHost}/download?`;
-  private filePath = "/tmp/participants.xlxs";
+  private filePath = "participants.xlxs";
 
   constructor() {
     super(new ParticipantFields());
@@ -101,13 +101,14 @@ export default class Participants extends DatasetBase {
     };
   }
 
-  async loadPartificipants(): Promise<ParticipantReponse> {
+  async loadPartificipants(localPath: string): Promise<ParticipantReponse> {
     let s = await this.crawler.downloadXlsx(
       this.participantsUrl,
-      this.filePath
+      `${localPath}/${this.filePath}`
     );
-    console.log(`load xlsx response ${s}`);
-    const participantsJson = this.crawler.xlsxToJson(this.filePath);
+    const participantsJson = this.crawler.xlsxToJson(
+      `${localPath}/${this.filePath}`
+    );
     return this.toParticipantArray(participantsJson);
   }
 }
