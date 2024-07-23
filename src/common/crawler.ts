@@ -77,7 +77,7 @@ export default class Crawler {
     return participantJsonArray;
   }
 
-  async downloadCsv(path: string) {
+  async loadCsv(path: string) {
     const response = await axios.get(path);
     const csvString = response.data;
     return Papa.parse(csvString).data;
@@ -176,7 +176,7 @@ export default class Crawler {
     const writeStream = fs.createWriteStream(absoluteOutputFilePath);
     const gunzip = zlib.createGunzip();
 
-    await readStream.pipe(gunzip).pipe(writeStream);
+    readStream.pipe(gunzip).pipe(writeStream);
   }
 
   deleteFolderRecursively(folderPath: string): void {

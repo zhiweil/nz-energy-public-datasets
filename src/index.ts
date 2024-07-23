@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-export { Field, FieldBase } from "./common/fieldBase";
+export { Field, FieldBase, DatasetBase, Crawler, Globals } from "./common";
 export {
   Participants,
   Participant,
@@ -25,3 +25,31 @@ export {
   ThirdPartyProviders,
   ThirdPartyProviderResponse,
 } from "./thirdPartyProvider";
+
+export {
+  NetworkRegionShapefiles,
+  NetworkRegionShapeFileMetadata,
+  NetworkRegionShapeFileResponse,
+  NetworkRegionShapeFileType,
+  NetworkRegionShapefile,
+  NetworkRegionShapefileFields,
+} from "./networkRegionShapefile";
+
+export {
+  ReconciledInjectionsAndOfftakes,
+  ReconciledInjectionsAndOfftakesFields,
+  ReconciledInjectionsAndOfftakesFile,
+} from "./reconciledInjectionAndOfftake";
+
+export {
+  NetworkRegionsToMeshblocks,
+  NetworkRegionsToMeshblock,
+  NetworkRegionsToMeshblockFields,
+  NetworkRegionsToMeshblockResponse,
+} from "./networkRegionsToMeshblock";
+export {
+  MeteredDataFiles,
+  MeteredDataFields,
+  MeteredDataFile,
+  MeteredDataType,
+} from "./merteredData";

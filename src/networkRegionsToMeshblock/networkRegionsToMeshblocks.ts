@@ -91,7 +91,7 @@ export default class NetworkRegionsToMeshblocks extends DatasetBase {
     let latest = this.crawler.getLatestEmiTable(elements);
     let href = `${Globals.EmiHost}${latest.attr("href")}`;
     let updatedAt = latest.text();
-    let jsonArray = await this.crawler.downloadCsv(href);
+    let jsonArray = await this.crawler.loadCsv(href);
 
     // ensure the data structure of the original CSV does not change
     this.checkHeaderRow(jsonArray[0] as string[]);
