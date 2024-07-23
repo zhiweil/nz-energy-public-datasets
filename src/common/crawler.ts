@@ -40,30 +40,6 @@ export default class Crawler {
     }
   }
 
-  async downloadXlsx(url: string, outputPath: string): Promise<any> {
-    try {
-      const response = await axios({
-        url,
-        method: "GET",
-        responseType: "stream",
-      });
-
-      // Create a write stream to save the file
-      const writer = fs.createWriteStream(outputPath);
-
-      // Pipe the response data to the write stream
-      response.data.pipe(writer);
-
-      // Return a promise that resolves when the file is fully written
-      return new Promise<void>((resolve, reject) => {
-        writer.on("finish", resolve);
-        writer.on("error", reject);
-      });
-    } catch (error) {
-      console.error("Error downloading file:", error);
-    }
-  }
-
   xlsxToJson(filePath: string): any[] {
     const workbook = XLSX.readFile(filePath);
     const sheet_name_list = workbook.SheetNames;
@@ -75,6 +51,15 @@ export default class Crawler {
       }
     );
     return participantJsonArray;
+  }
+
+  xlsxToCsv(filePath: string): any[] {
+    const workbook = XLSX.readFile(filePath);
+    const sheet_name_list = workbook.SheetNames;
+    const participantJsonArray = XLSX.utils.sheet_to_csv(
+      workbook.Sheets[sheet_name_list[0]]
+    );
+    return Papa.parse(participantJsonArray).data;
   }
 
   async loadCsv(path: string) {
@@ -190,5 +175,9 @@ export default class Crawler {
     } else {
       console.log(`Folder not found: ${absoluteFolderPath}`);
     }
+  }
+
+  csvObjectToString(csvArray: any[][]): string {
+    return Papa.unparse(csvArray);
   }
 }

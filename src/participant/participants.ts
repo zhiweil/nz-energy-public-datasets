@@ -102,7 +102,7 @@ export default class Participants extends DatasetBase {
   }
 
   async loadPartificipants(localPath: string): Promise<ParticipantReponse> {
-    let s = await this.crawler.downloadXlsx(
+    let s = await this.crawler.downloadFile(
       this.participantsUrl,
       `${localPath}/${this.filePath}`
     );

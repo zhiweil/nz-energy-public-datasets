@@ -7,18 +7,21 @@
 // =============================================================================
 
 export { Field, FieldBase, DatasetBase, Crawler, Globals } from "./common";
+
 export {
   Participants,
   Participant,
   ParticipantFields,
   ParticipantReponse,
 } from "./participant";
+
 export {
   NetworkSupplyPoints,
   NetworkSupplyPointFields,
   NetworkSupplyPoint,
   NetworkSupplyPointResponse,
 } from "./nsp";
+
 export {
   ThirdPartyProvider,
   ThirdPartyProviderField,
@@ -47,9 +50,17 @@ export {
   NetworkRegionsToMeshblockFields,
   NetworkRegionsToMeshblockResponse,
 } from "./networkRegionsToMeshblock";
+
 export {
   MeteredDataFiles,
   MeteredDataFields,
   MeteredDataFile,
   MeteredDataType,
 } from "./merteredData";
+
+export {
+  GenerationDatasetFields,
+  GenerationDatasetType,
+  GenerationDatasets,
+  GenerationDatasetFile,
+} from "./generation";
