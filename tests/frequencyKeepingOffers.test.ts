@@ -4,13 +4,13 @@
 // Node module: @zhiweiliu/nz-energy-public-datasets
 // This file is licensed under the MIT License.
 // rLicense text available at https://opensource.org/licenses/MIT
+// =============================================================================
 
 import {
   FrequencyKeepingOfferDatasetType,
   FrequencyKeepingOffers,
 } from "../src/frequencyKeeping";
 
-// =============================================================================
 test("EMI frequency keeping datasets - offers", async () => {
   let ds = new FrequencyKeepingOffers();
 

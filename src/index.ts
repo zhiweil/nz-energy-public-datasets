@@ -54,3 +54,8 @@ export {
 export { MeteredDataFiles, MeteredDataType } from "./merteredData";
 
 export { GenerationDatasetType, GenerationDatasets } from "./generation";
+
+export {
+  DispatchAndPricing,
+  DispatchAndPricingDatesetType,
+} from "./dispatchAndPricing";
