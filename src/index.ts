@@ -51,16 +51,6 @@ export {
   NetworkRegionsToMeshblockResponse,
 } from "./networkRegionsToMeshblock";
 
-export {
-  MeteredDataFiles,
-  MeteredDataFields,
-  MeteredDataFile,
-  MeteredDataType,
-} from "./merteredData";
+export { MeteredDataFiles, MeteredDataType } from "./merteredData";
 
-export {
-  GenerationDatasetFields,
-  GenerationDatasetType,
-  GenerationDatasets,
-  GenerationDatasetFile,
-} from "./generation";
+export { GenerationDatasetType, GenerationDatasets } from "./generation";

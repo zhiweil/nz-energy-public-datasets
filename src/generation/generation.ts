@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import { DatasetBase, FieldBase, Globals } from "../common";
+import { DatasetBase, DatasetFields, DatasetFile, Globals } from "../common";
 import assert from "assert";
 
 export enum GenerationDatasetType {
@@ -14,28 +14,6 @@ export enum GenerationDatasetType {
   GENERATION_FLEET_PROPOSED = "Proposed",
   GENERATION_FLEET_EXISTING = "Existing",
   GENERATION_FLEET_EXISTING_DISPATCHED = "Existing_Dispatched",
-}
-
-export class GenerationDatasetFields extends FieldBase {
-  constructor() {
-    super();
-    this.FieldType = "GenerationField";
-    this.Fields = [
-      {
-        field: "file",
-        value: "file",
-      },
-      {
-        field: "updatedAt",
-        value: "updatedAt",
-      },
-    ];
-  }
-}
-
-export interface GenerationDatasetFile {
-  file: string;
-  updatedAt: string;
 }
 
 export default class GenerationDatasets extends DatasetBase {
@@ -46,7 +24,7 @@ export default class GenerationDatasets extends DatasetBase {
   private static readonly tagPath = "tr td.two a";
 
   constructor() {
-    super(new GenerationDatasetFields());
+    super(new DatasetFields("GenerationField"));
   }
 
   getDatasetUrl(type: GenerationDatasetType): string {
@@ -65,10 +43,10 @@ export default class GenerationDatasets extends DatasetBase {
 
   async getGenerationFileList(
     type: GenerationDatasetType
-  ): Promise<GenerationDatasetFile[]> {
+  ): Promise<DatasetFile[]> {
     let page = await this.crawler.readPage(this.getDatasetUrl(type));
     let tags = this.crawler.getElementsByTag(GenerationDatasets.tagPath, page);
-    let files: GenerationDatasetFile[] = [];
+    let files: DatasetFile[] = [];
     for (let t of tags) {
       let href = t.attr("href");
       if (!href) {
@@ -134,7 +112,7 @@ export default class GenerationDatasets extends DatasetBase {
   async downloadGenerationFleetFile(
     type: GenerationDatasetType,
     localPath: string
-  ): Promise<GenerationDatasetFile> {
+  ): Promise<DatasetFile> {
     assert(
       type === GenerationDatasetType.GENERATION_FLEET_EXISTING_DISPATCHED ||
         type === GenerationDatasetType.GENERATION_FLEET_EXISTING,

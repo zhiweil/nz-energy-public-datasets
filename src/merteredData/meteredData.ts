@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import { DatasetBase, FieldBase, Globals } from "../common";
+import { DatasetBase, DatasetFields, DatasetFile, Globals } from "../common";
 
 export enum MeteredDataType {
   EMBEDDED_GENERATION = "Embedded_generation",
@@ -18,43 +18,16 @@ export enum MeteredDataType {
   UNIT_LEVEL_GENERATION_IR = "Unit_level_generation_IR",
 }
 
-export class MeteredDataFields extends FieldBase {
-  constructor() {
-    super();
-    this.FieldType = "MeteredDataField";
-    this.Fields = [
-      {
-        field: "file",
-        value: "file",
-      },
-      {
-        field: "updatedAt",
-        value: "updatedAt",
-      },
-      {
-        field: "for",
-        value: "for",
-      },
-    ];
-  }
-}
-
-export interface MeteredDataFile {
-  file: string;
-  updatedAt: string;
-  for: number;
-}
-
 export default class MeteredDataFiles extends DatasetBase {
   private static readonly url = `${Globals.EmiHost}/Wholesale/Datasets/Metered_data`;
 
   constructor() {
-    super(new MeteredDataFields());
+    super(new DatasetFields("MeteredDataField"));
   }
 
-  async getFileList(type: MeteredDataType): Promise<MeteredDataFile[]> {
+  async getFileList(type: MeteredDataType): Promise<DatasetFile[]> {
     const errMsg = "`Unrecognized metered data file format";
-    let files: MeteredDataFile[] = [];
+    let files: DatasetFile[] = [];
     let page = await this.crawler.readPage(`${MeteredDataFiles.url}/${type}`);
     let fileTags = this.crawler.getElementsByTag("tr td.two a", page);
 
@@ -76,7 +49,7 @@ export default class MeteredDataFiles extends DatasetBase {
       });
     }
 
-    return files.sort((a, b) => b.for - a.for);
+    return files.sort((a, b) => (b.for ?? 0) - (a.for ?? 0));
   }
 
   async loadFile(type: MeteredDataType, fileName: string): Promise<any[]> {

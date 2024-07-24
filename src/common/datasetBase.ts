@@ -9,6 +9,33 @@
 import Crawler from "./crawler";
 import { FieldBase } from "./fieldBase";
 
+export class DatasetFields extends FieldBase {
+  constructor(ft: string) {
+    super();
+    this.FieldType = ft;
+    this.Fields = [
+      {
+        field: "file",
+        value: "file",
+      },
+      {
+        field: "updatedAt",
+        value: "updatedAt",
+      },
+      {
+        field: "for",
+        value: "for",
+      },
+    ];
+  }
+}
+
+export interface DatasetFile {
+  file: string;
+  updatedAt: string;
+  for?: number;
+}
+
 export default class DatasetBase {
   crawler: Crawler;
   fields: FieldBase;

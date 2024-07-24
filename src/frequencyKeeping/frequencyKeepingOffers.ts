@@ -5,5 +5,3 @@
 // This file is licensed under the MIT License.
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
-
-export { default as MeteredDataFiles, MeteredDataType } from "./meteredData";
