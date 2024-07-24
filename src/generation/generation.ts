@@ -119,7 +119,6 @@ export default class GenerationDatasets extends DatasetBase {
       `Invalid dataset type: ${type}`
     );
     let files = await this.getGenerationFileList(type);
-    console.log(files);
     if (
       files.length != 2 ||
       !files.find((f) => f.file == GenerationDatasets.existingFileName) ||
