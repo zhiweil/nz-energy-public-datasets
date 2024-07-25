@@ -60,4 +60,8 @@ export {
   DispatchAndPricingDatesetType,
 } from "./dispatchAndPricing";
 
-export { MarketStructure, MarketStructureDatasetType } from "./marketStructure";
+export {
+  MarketStructure,
+  MarketStructureDatasetType,
+  MarketStructureDatasetFilenames,
+} from "./marketStructure";

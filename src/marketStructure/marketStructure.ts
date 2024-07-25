@@ -14,6 +14,15 @@ export enum MarketStructureDatasetType {
   ICP_AND_METERING_DETAILS = "ICPandMeteringDetails",
 }
 
+export enum MarketStructureDatasetFilenames {
+  NetworkReportingRegion = "MarketShareTrendsByNetworkReportingRegion.csv",
+  RootNSP = "MarketShareTrendsByRootNSP.csv",
+  NSP = "DistributionPriceCategoryCodesByNSP.csv",
+  MepAndTrader = "MarketShareByMEPandTrader.csv",
+  Level1Anzsic = "MeterCategoryByLevel1ANZSIC.csv",
+  MeteringConfiguration = "MeteringConfigurationsInclDistributionPriceCatCode.csv",
+}
+
 export default class MarketStructure extends DatasetBase {
   private static readonly url = `${Globals.EmiHost}/Retail/Datasets/MarketStructure`;
   private static readonly fileTag = "tbody tr td.two a";
@@ -29,9 +38,6 @@ export default class MarketStructure extends DatasetBase {
   }
 
   async getTrendsFiles(): Promise<DatasetFile[]> {
-    const byNetworkReportingRegion =
-      "MarketShareTrendsByNetworkReportingRegion";
-    const byRootNSP = "MarketShareTrendsByRootNSP";
     let files: DatasetFile[] = [];
     let page = await this.crawler.readPage(
       this.getUrl(MarketStructureDatasetType.MARKET_SHARE_TRENDS)
@@ -46,8 +52,10 @@ export default class MarketStructure extends DatasetBase {
         let f = Number(nameParts[0]);
         if (
           isNaN(f) ||
-          (!name.endsWith(`${byNetworkReportingRegion}.csv`) &&
-            !name.endsWith(`${byRootNSP}.csv`))
+          (!name.endsWith(
+            MarketStructureDatasetFilenames.NetworkReportingRegion
+          ) &&
+            !name.endsWith(MarketStructureDatasetFilenames.RootNSP))
         ) {
           throw new Error("Market structure trends files have changed");
         }
@@ -70,7 +78,6 @@ export default class MarketStructure extends DatasetBase {
   }
 
   async getDistributionPriceCategoryCodesFile(): Promise<DatasetFile> {
-    const codesFile = "DistributionPriceCategoryCodesByNSP";
     let files: DatasetFile[] = [];
     let page = await this.crawler.readPage(
       this.getUrl(MarketStructureDatasetType.DISTRIBUTION_PRICE_CATEGORY_CODES)
@@ -83,7 +90,7 @@ export default class MarketStructure extends DatasetBase {
         let name = pathParts[pathParts.length - 1].trim();
         let nameParts = name.split("_");
         let f = Number(nameParts[0]);
-        if (isNaN(f) || !name.endsWith(`${codesFile}.csv`)) {
+        if (isNaN(f) || !name.endsWith(MarketStructureDatasetFilenames.NSP)) {
           throw new Error(
             "Market structure distribution price category codes file has changed"
           );
@@ -126,9 +133,9 @@ export default class MarketStructure extends DatasetBase {
         if (
           isNaN(f) ||
           !(
-            name.endsWith(`${byMepAndTrader}.csv`) ||
-            name.endsWith(`${byLevel1Anzsic}.csv`) ||
-            name.endsWith(`${meteringConfiguration}.csv`)
+            name.endsWith(MarketStructureDatasetFilenames.MepAndTrader) ||
+            name.endsWith(MarketStructureDatasetFilenames.Level1Anzsic) ||
+            name.endsWith(MarketStructureDatasetFilenames.MeteringConfiguration)
           )
         ) {
           throw new Error(
