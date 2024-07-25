@@ -59,3 +59,5 @@ export {
   DispatchAndPricing,
   DispatchAndPricingDatesetType,
 } from "./dispatchAndPricing";
+
+export { MarketStructure, MarketStructureDatasetType } from "./marketStructure";

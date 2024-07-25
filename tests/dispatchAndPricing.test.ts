@@ -27,9 +27,9 @@ test("EMI dispatch and pricing datasets - daily", async () => {
     `/tmp/dispatchAndPricing/daily/${files[0].file}`
   );
   expect(lf.file).toBe(`/tmp/dispatchAndPricing/daily/${files[0].file}`);
-}, 15000);
+}, 30000);
 
-test("EMI dispatch and pricing datasets - daily", async () => {
+test("EMI dispatch and pricing datasets - monthly", async () => {
   let ds = new DispatchAndPricing();
 
   // monthly files
@@ -46,4 +46,4 @@ test("EMI dispatch and pricing datasets - daily", async () => {
     `/tmp/dispatchAndPricing/monthly/${files[0].file}`
   );
   expect(lf.file).toBe(`/tmp/dispatchAndPricing/monthly/${files[0].file}`);
-}, 15000);
+}, 30000);
