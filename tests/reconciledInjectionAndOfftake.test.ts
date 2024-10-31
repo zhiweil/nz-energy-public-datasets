@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import ReconciledInjectionsAndOfftakes from "../src/reconciledInjectionAndOfftake/reconciledInjectionsAndOfftakes";
+import ReconciledInjectionsAndOfftakes from "../src/reconciledInjectionAndOfftake/reconciledInjectionsAndofftakes";
 
 test("EMI reconciliation data", async () => {
   let recon = new ReconciledInjectionsAndOfftakes();

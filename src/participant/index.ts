@@ -9,6 +9,6 @@
 export {
   default as Participants,
   Participant,
-  ParticipantReponse,
+  ParticipantResponse,
 } from "./participants";
 export { default as ParticipantFields } from "./participantFields";

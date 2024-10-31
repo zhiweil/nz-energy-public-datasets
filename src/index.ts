@@ -12,7 +12,7 @@ export {
   Participants,
   Participant,
   ParticipantFields,
-  ParticipantReponse,
+  ParticipantResponse,
 } from "./participant";
 
 export {

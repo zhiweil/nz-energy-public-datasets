@@ -48,7 +48,7 @@ export interface CodeToParticipant {
   name: string;
 }
 
-export interface ParticipantReponse {
+export interface ParticipantResponse {
   participants: Participant[];
   codes: CodeToParticipant[];
   fields: Field[];
@@ -63,7 +63,7 @@ export default class Participants extends DatasetBase {
     super(new ParticipantFields());
   }
 
-  private toParticipantArray(participantsJson: any[]): ParticipantReponse {
+  private toParticipantArray(participantsJson: any[]): ParticipantResponse {
     let raw: Participant[] = [];
     let codeToParticipant: CodeToParticipant[] = [];
     let ts = Date.now();
@@ -101,7 +101,7 @@ export default class Participants extends DatasetBase {
     };
   }
 
-  async loadPartificipants(localPath: string): Promise<ParticipantReponse> {
+  async loadPartificipants(localPath: string): Promise<ParticipantResponse> {
     let s = await this.crawler.downloadFile(
       this.participantsUrl,
       `${localPath}/${this.filePath}`
