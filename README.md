@@ -20,9 +20,11 @@ import {
   ParticipantResponse,
 } from "@zhiweiliu/nz-energy-public-datasets";
 
-/** 
-The loadParticipants() method can accept an optional local folder parameter, which specifies the directory to temporarily store downloaded information before processing. By default, this folder is set to "/tmp".
-**/
+/**
+ * The loadParticipants() method can accept an optional local folder parameter, which
+ * specifies the directory to temporarily store downloaded information before processing.
+ * By default, this folder is set to "/tmp".
+ **/
 const participants = new Participants();
 const ps: ParticipantResponse = await participants.loadPartificipants(
   "/to/local/folder"
