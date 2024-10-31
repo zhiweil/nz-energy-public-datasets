@@ -48,7 +48,7 @@ export default class ThirdPartyProviders extends DatasetBase {
     super(new ThirdPartyProviderField());
   }
 
-  async loadOrganisations(): Promise<ThirdPartyProviderResponse> {
+  async loadThirdPartyProviders(): Promise<ThirdPartyProviderResponse> {
     let page = await this.crawler.readPage(this.url);
     let tabs = this.crawler.getElementsByTag(this.tabClass, page);
     let tpps: ThirdPartyProvider[] = [];

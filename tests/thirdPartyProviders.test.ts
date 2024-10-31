@@ -12,7 +12,8 @@ test("EA third party provider", async () => {
   const ts = Date.now();
 
   let tpp = new ThirdPartyProviders();
-  const tpps = await tpp.loadOrganisations();
+  const tpps = await tpp.loadThirdPartyProviders();
+  console.log(JSON.stringify(tpps, null, 2));
   expect(tpps).toBeTruthy();
 
   // ensure that we got the identifiers right
