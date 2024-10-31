@@ -19,10 +19,13 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
-        run: npm
-
+        run: npm ci
       - name: Build package
         run: npm build
+      - name: Bump Module version
+        run: npm version minor
+      - name: Push Git update
+        run: git push
       - name: Semantic Release
         run: npx semantic-release
         env:
