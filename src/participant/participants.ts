@@ -101,7 +101,7 @@ export default class Participants extends DatasetBase {
     };
   }
 
-  async loadPartificipants(localPath: string): Promise<ParticipantResponse> {
+  async loadPartificipants(localPath: string = "/tmp"): Promise<ParticipantResponse> {
     let s = await this.crawler.downloadFile(
       this.participantsUrl,
       `${localPath}/${this.filePath}`
