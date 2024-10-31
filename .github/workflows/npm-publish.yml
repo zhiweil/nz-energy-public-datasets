@@ -30,6 +30,10 @@ jobs:
         run: npm version minor
       - name: Push Git update
         run: git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Publish to NPM
+        run: npm publish --access public
       - name: Semantic Release
         run: npx semantic-release
         env:
