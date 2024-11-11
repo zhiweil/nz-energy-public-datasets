@@ -6,7 +6,7 @@
 // rLicense text available at https://opensource.org/licenses/MIT
 // =============================================================================
 
-import { ParticipantFields, Participants } from "../src";
+import { Participant, ParticipantFields, Participants } from "../src";
 
 test("Load New Zealand EA Market Partificipants", async () => {
   const participants = new Participants();
@@ -85,4 +85,25 @@ test("Load New Zealand EA Market Partificipants", async () => {
       ps.ts
     )}`
   );
+});
+
+test("Mehod equals()", async () => {
+  const participants = new Participants();
+  const ps = await participants.loadPartificipants();
+  const p1 = ps.participants[0];
+  const p2 = new Participant(JSON.parse(JSON.stringify(p1)));
+
+  expect(p1.equals(p2)).toBe(true);
+
+  // ts is not compared in equals() method
+  p2.ts = p2.ts + 1;
+  expect(p1.equals(p2)).toBe(true);
+
+  // codes is compared
+  p2.codes.push("FAKE");
+  expect(p1.equals(p2)).toBe(false);
+
+  // codes is compared
+  p1.codes.push("FAKE");
+  expect(p1.equals(p2)).toBe(true);
 });
