@@ -13,13 +13,29 @@ test("EA third party provider", async () => {
 
   let tpp = new ThirdPartyProviders();
   const tpps = await tpp.loadThirdPartyProviders();
-  console.log(JSON.stringify(tpps, null, 2));
   expect(tpps).toBeTruthy();
+  console.log("Found third party providers: ", tpps.thirdPartyProviders.length);
 
   // ensure that we got the identifiers right
   tpps.thirdPartyProviders.forEach((t) => {
     expect(t.identifier.length).toBeLessThan(5);
   });
+
+  // check duplicate
+  const tppSet = new Set<string>();
+  tpps.thirdPartyProviders.forEach((t) => {
+    tppSet.add(t.organisation);
+  });
+  console.log("Found unique third party providers: ", tppSet.size);
+  for (let t of tppSet) {
+    let ts = tpps.thirdPartyProviders.filter((tpp) => tpp.organisation === t);
+    if (ts.length > 1) {
+      console.log(
+        "Duplicate third party provider: ",
+        JSON.stringify(ts, null, 2)
+      );
+    }
+  }
 
   // ensure top-leve fields are correct
   expect(tpps.href).toBeTruthy();
