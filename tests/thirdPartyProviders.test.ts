@@ -7,7 +7,7 @@
 // =============================================================================
 
 import ThirdPartyProviders from "../src/thirdPartyProvider/thirdPartyProviders";
-
+import { ThirdPartyProvider } from "../src/thirdPartyProvider/thirdPartyProviders";
 test("EA third party provider", async () => {
   const ts = Date.now();
 
@@ -34,4 +34,26 @@ test("EA third party provider", async () => {
     expect(t.ts).toBeGreaterThan(0);
     expect(t.ts).toBeGreaterThan(ts);
   });
+}, 15000);
+
+test("Method equals()", async () => {
+  const ts = Date.now();
+
+  let tpp = new ThirdPartyProviders();
+  const tpps = await tpp.loadThirdPartyProviders();
+  console.log(JSON.stringify(tpps, null, 2));
+  expect(tpps).toBeTruthy();
+
+  const tpp1 = tpps.thirdPartyProviders[0];
+  const tpp2 = new ThirdPartyProvider(JSON.parse(JSON.stringify(tpp1)));
+  expect(tpp1.equals(tpp2)).toBeTruthy();
+
+  tpp2.ts = tpp2.ts + 1;
+  expect(tpp1.equals(tpp2)).toBeTruthy();
+
+  tpp2.identifier = "FAKE";
+  expect(tpp1.equals(tpp2)).toBeFalsy();
+
+  tpp1.identifier = "FAKE";
+  expect(tpp1.equals(tpp2)).toBeTruthy();
 }, 15000);

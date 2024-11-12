@@ -31,6 +31,25 @@ export class ThirdPartyProvider {
   orgnisation: string = "";
   identifier: string = "";
   ts: number = 0;
+
+  constructor(
+    data: {
+      orgnisation?: string;
+      identifier?: string;
+      ts?: number;
+    } = {}
+  ) {
+    this.orgnisation = data.orgnisation || "";
+    this.identifier = data.identifier || "";
+    this.ts = data.ts || 0;
+  }
+
+  equals(other: ThirdPartyProvider): boolean {
+    return (
+      this.orgnisation === other.orgnisation &&
+      this.identifier === other.identifier
+    );
+  }
 }
 
 export interface ThirdPartyProviderResponse {
@@ -65,11 +84,13 @@ export default class ThirdPartyProviders extends DatasetBase {
       if (org.length == 0 || id.length == 0) {
         continue;
       }
-      tpps.push({
-        orgnisation: org,
-        identifier: id,
-        ts,
-      });
+      tpps.push(
+        new ThirdPartyProvider({
+          orgnisation: org,
+          identifier: id,
+          ts,
+        })
+      );
     }
     return { thirdPartyProviders: tpps, ts, href: this.url };
   }
