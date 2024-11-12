@@ -151,6 +151,7 @@ export interface ParticipantResponse {
   participants: Participant[];
   codes: CodeToParticipant[];
   fields: Field[];
+  href: string;
   ts: number;
 }
 
@@ -196,6 +197,7 @@ export default class Participants extends DatasetBase {
       participants: raw,
       codes: codeToParticipant,
       fields: this.fields.Fields,
+      href: this.participantsUrl,
       ts,
     };
   }

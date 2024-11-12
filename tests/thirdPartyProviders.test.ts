@@ -30,7 +30,7 @@ test("EA third party provider", async () => {
   // ensure all fields are parsed correctly
   tpps.thirdPartyProviders.forEach((t) => {
     expect(t.identifier).toBeTruthy();
-    expect(t.orgnisation).toBeTruthy();
+    expect(t.organisation).toBeTruthy();
     expect(t.ts).toBeGreaterThan(0);
     expect(t.ts).toBeGreaterThan(ts);
   });

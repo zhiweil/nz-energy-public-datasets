@@ -7,7 +7,7 @@
 // =============================================================================
 
 import DatasetBase from "../common/datasetBase";
-import { FieldBase } from "../common/fieldBase";
+import { Field, FieldBase } from "../common/fieldBase";
 import Globals from "../common/globals";
 
 export class ThirdPartyProviderField extends FieldBase {
@@ -28,7 +28,7 @@ export class ThirdPartyProviderField extends FieldBase {
 }
 
 export class ThirdPartyProvider {
-  orgnisation: string = "";
+  organisation: string = "";
   identifier: string = "";
   ts: number = 0;
 
@@ -39,14 +39,14 @@ export class ThirdPartyProvider {
       ts?: number;
     } = {}
   ) {
-    this.orgnisation = data.orgnisation || "";
+    this.organisation = data.orgnisation || "";
     this.identifier = data.identifier || "";
     this.ts = data.ts || 0;
   }
 
   equals(other: ThirdPartyProvider): boolean {
     return (
-      this.orgnisation === other.orgnisation &&
+      this.organisation === other.organisation &&
       this.identifier === other.identifier
     );
   }
@@ -55,6 +55,7 @@ export class ThirdPartyProvider {
 export interface ThirdPartyProviderResponse {
   thirdPartyProviders: ThirdPartyProvider[];
   href: string;
+  fields: Field[];
   ts: number;
 }
 
@@ -92,6 +93,11 @@ export default class ThirdPartyProviders extends DatasetBase {
         })
       );
     }
-    return { thirdPartyProviders: tpps, ts, href: this.url };
+    return {
+      thirdPartyProviders: tpps,
+      ts,
+      href: this.url,
+      fields: this.fields.Fields,
+    };
   }
 }
