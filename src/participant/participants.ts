@@ -26,7 +26,7 @@ export class Participant {
   regDate: string = "";
   transCustomer: boolean = false;
   traderInElectricity: boolean = false;
-  mep: boolean = false;
+  mep: boolean = false; 
   genAsNongenerator: boolean = false;
   ath: boolean = false;
   ancillaryServiceAgent: boolean = false;
