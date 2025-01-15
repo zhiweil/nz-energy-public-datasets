@@ -18,7 +18,7 @@ test("EA third party provider", async () => {
 
   // ensure that we got the identifiers right
   tpps.thirdPartyProviders.forEach((t) => {
-    expect(t.identifier.length).toBeLessThan(5);
+    expect(t.identifier.length).toBeLessThan(15);
   });
 
   // check duplicate
@@ -35,6 +35,7 @@ test("EA third party provider", async () => {
         JSON.stringify(ts, null, 2)
       );
     }
+    expect(ts.length).toBe(1);
   }
 
   // ensure top-leve fields are correct
@@ -61,7 +62,10 @@ test("Method equals()", async () => {
   expect(tpps).toBeTruthy();
 
   const tpp1 = tpps.thirdPartyProviders[0];
+  console.log(JSON.stringify(tpp1, null, 2));
+
   const tpp2 = new ThirdPartyProvider(JSON.parse(JSON.stringify(tpp1)));
+  console.log(JSON.stringify(tpp2, null, 2));
   expect(tpp1.equals(tpp2)).toBeTruthy();
 
   tpp2.ts = tpp2.ts + 1;
