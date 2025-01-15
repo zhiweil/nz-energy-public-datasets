@@ -1,6 +1,6 @@
 {
   "name": "@zhiweiliu/nz-energy-public-datasets",
-  "version": "1.3.3",
+  "version": "1.4.0",
   "description": "The utilities to load public datasets of New Zealand energy market in JSON format. These datasets are hosted by the websites of Electricity Authority, Electricity Market Information, Transpower, and etc.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
