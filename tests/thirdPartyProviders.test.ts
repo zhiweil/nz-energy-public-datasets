@@ -18,7 +18,7 @@ test("EA third party provider", async () => {
 
   // ensure that we got the identifiers right
   tpps.thirdPartyProviders.forEach((t) => {
-    expect(t.identifier.length).toBeLessThan(15);
+    expect(t.identifier.length).toBeLessThan(5);
   });
 
   // check duplicate
@@ -35,7 +35,6 @@ test("EA third party provider", async () => {
         JSON.stringify(ts, null, 2)
       );
     }
-    expect(ts.length).toBe(1);
   }
 
   // ensure top-leve fields are correct

@@ -68,39 +68,6 @@ export default class ThirdPartyProviders extends DatasetBase {
     super(new ThirdPartyProviderField());
   }
 
-  combineDuplicates(
-    tpps: ThirdPartyProvider[]
-  ): ThirdPartyProvider[] {
-    let combined: ThirdPartyProvider[] = [];
-
-      // check duplicate
-    const tppSet = new Set<string>();
-    tpps.forEach((t) => {
-      tppSet.add(t.organisation);
-    });
-
-    for (let t of tppSet) {
-    let ts = tpps.filter((tpp) => tpp.organisation === t);
-      if (ts.length > 1) {
-        const ids: string[] = [];
-        ts.forEach((t1) => {
-          if (!ids.includes(t1.identifier)) {
-            ids.push(t1.identifier);
-          }
-        });
-        combined.push(new ThirdPartyProvider({
-          organisation: t,
-          identifier: ids.join(", "),
-          ts: ts[0].ts,
-        }));
-      } else if (ts.length == 1) {
-        combined.push(ts[0]);
-      }
-    }
-
-    return combined;
-  }
-
   async loadThirdPartyProviders(): Promise<ThirdPartyProviderResponse> {
     let page = await this.crawler.readPage(this.url);
     let tabs = this.crawler.getElementsByTag(this.tabClass, page);
@@ -127,7 +94,7 @@ export default class ThirdPartyProviders extends DatasetBase {
       );
     }
     return {
-      thirdPartyProviders: this.combineDuplicates(tpps),
+      thirdPartyProviders: tpps,
       ts,
       href: this.url,
       fields: this.fields.Fields,
