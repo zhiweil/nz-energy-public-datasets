@@ -64,6 +64,7 @@ test("New Zealand EA Network Supply Points", async () => {
 test("New Zealand EA Network Supply Points File Download", async () => {
   let nsps = new NetworkSupplyPoints();
   let files = await nsps.loadFileList();
+  console.log(files);
   const localPath = "/tmp/networkSupplyPoint";
   await nsps.downloadFile(files[0], `${localPath}/${files[0]}`);
   await nsps.crawler.deleteFolderRecursively(`${localPath}/${files[0]}`);

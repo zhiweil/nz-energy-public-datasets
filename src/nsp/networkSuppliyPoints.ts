@@ -10,7 +10,6 @@ import Globals from "../common/globals";
 import DatasetBase from "../common/datasetBase";
 import NetworkSupplyPointFields from "./networkSupplyPointFields";
 import { Field } from "../common/fieldBase";
-import { getDefaultResultOrder } from "dns";
 
 export class NetworkSupplyPoint {
   [index: string]: string | number;
@@ -84,7 +83,7 @@ export default class NetworkSupplyPoints extends DatasetBase {
       NetworkSupplyPoints.fileTag,
       page
     );
-    for (let i = 1; i < elements.length; i++) {
+    for (let i = 0; i < elements.length; i++) {
       let file = elements[i].attr("href");
       let parts = file.split("/");
       files.push(parts[parts.length - 1]);
