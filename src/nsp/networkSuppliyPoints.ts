@@ -10,6 +10,7 @@ import Globals from "../common/globals";
 import DatasetBase from "../common/datasetBase";
 import NetworkSupplyPointFields from "./networkSupplyPointFields";
 import { Field } from "../common/fieldBase";
+import { getDefaultResultOrder } from "dns";
 
 export class NetworkSupplyPoint {
   [index: string]: string | number;
@@ -76,16 +77,36 @@ export default class NetworkSupplyPoints extends DatasetBase {
     return nsp;
   }
 
-  async loadNetworkSupllyPoints(): Promise<NetworkSupplyPointResponse> {
+  async loadFileList(): Promise<string[]> {
+    const files: string[] = [];
     const page = await this.crawler.readPage(NetworkSupplyPoints.nspTableUrl);
     const elements = this.crawler.getElementsByTag(
       NetworkSupplyPoints.fileTag,
       page
     );
+    for (let i = 1; i < elements.length; i++) {
+      let file = elements[i].attr("href");
+      let parts = file.split("/");
+      files.push(parts[parts.length - 1]);
+    }
+    return files;
+  }
 
-    let latest = this.crawler.getLatestEmiTable(elements);
-    let href = `${Globals.EmiHost}${latest.attr("href")}`;
-    let updatedAt = latest.text();
+  getFileUrl(filename: string): string {
+    return `${NetworkSupplyPoints.nspTableUrl}/${filename}`;
+  }
+
+  async downloadFile(file: string, localPath: string): Promise<void> {
+    const href = this.getFileUrl(file);
+    await this.crawler.downloadFile(href, localPath);
+  }
+
+  async loadNetworkSupllyPoints(
+    file: string
+  ): Promise<NetworkSupplyPointResponse> {
+    const href = this.getFileUrl(file);
+    const fileParts = file.split("_");
+    const updatedAt = fileParts[0];
     let jsonArray = await this.crawler.loadCsv(href);
 
     // ensure the data structure of the original CSV does not change

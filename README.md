@@ -44,3 +44,37 @@ const tpps = new ThirdPartyProviders();
 const providers: ThirdPartyProviderResponse =
   await tpps.loadThirdPartyProviders();
 ```
+
+## 3. Network Supply Points (NSP)
+
+The information is hosted on the [Electricity Market Information website](https://www.emi.ea.govt.nz/Wholesale/Datasets/MappingsAndGeospatial/NetworkSupplyPointsTable).
+
+To load a list of files:
+
+```javascript
+let nsps = new NetworkSupplyPoints();
+let files = await nsps.loadFileList();
+```
+
+To download a specific NSP file:
+
+```javascript
+let nsps = new NetworkSupplyPoints();
+let files = await nsps.loadFileList();
+const localPath = "/tmp/networkSupplyPoint";
+// download the latest NSP file
+await nsps.downloadFile(files[0], `${localPath}/${files[0]}`);
+
+// TODO: copy to the location you would like to store the file
+
+// delete downloaded file from the temporary folder
+await nsps.crawler.deleteFolderRecursively(`${localPath}/${files[0]}`);
+```
+
+To load NSP data into a collection of objects:
+
+```javascript
+let nsps = new NetworkSupplyPoints();
+let files = await nsps.loadFileList();
+let nspsResp = await nsps.loadNetworkSupllyPoints(files[0]);
+```

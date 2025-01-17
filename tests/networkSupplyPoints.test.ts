@@ -12,7 +12,8 @@ import NetworkSupplyPoints from "../src/nsp/networkSuppliyPoints";
 test("New Zealand EA Network Supply Points", async () => {
   let ts = Date.now();
   let nsps = new NetworkSupplyPoints();
-  let nspsResp = await nsps.loadNetworkSupllyPoints();
+  let files = await nsps.loadFileList();
+  let nspsResp = await nsps.loadNetworkSupllyPoints(files[0]);
 
   // check the top-level fields in the response
   expect(nspsResp).toBeTruthy();
@@ -58,4 +59,12 @@ test("New Zealand EA Network Supply Points", async () => {
   console.log(
     `Found ${nspsResp.networkSupplyPoints.length} network supply points in dataset ${nspsResp.href}`
   );
+}, 30000);
+
+test("New Zealand EA Network Supply Points File Download", async () => {
+  let nsps = new NetworkSupplyPoints();
+  let files = await nsps.loadFileList();
+  const localPath = "/tmp/networkSupplyPoint";
+  await nsps.downloadFile(files[0], `${localPath}/${files[0]}`);
+  await nsps.crawler.deleteFolderRecursively(`${localPath}/${files[0]}`);
 }, 30000);
