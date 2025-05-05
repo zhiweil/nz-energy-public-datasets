@@ -29,8 +29,8 @@ export class NetworkSupplyPoint {
   description: string = "";
   nztmEasting: string = "";
   nztmNorthing: string = "";
-  networkRportingRegionId: string = "";
-  networkRportingRegion: string = "";
+  networkReportingRegionId: string = "";
+  networkReportingRegion: string = "";
   zone: string = "";
   island: string = "";
   startDate: string = "";

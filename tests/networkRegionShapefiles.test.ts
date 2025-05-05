@@ -49,9 +49,14 @@ test("Load WGS84 NRR GeoJSON", async () => {
       nrss.networkRegionShapefiles.length - 1
     } shapefiles for NZ network providers`
   );
-  console.log(
-    nrss.networkRegionShapefiles[nrss.networkRegionShapefiles.length - 1]
-  );
+  let rids = nrss.networkRegionShapefiles.map((n) => {
+    return {
+      region: n.region,
+      id: n.id,
+    };
+  });
+
+  console.log(JSON.stringify(rids, null, 2));
 }, 30000);
 
 test("Load WGS84 Zone GeoJSON", async () => {
@@ -95,9 +100,13 @@ test("Load WGS84 Zone GeoJSON", async () => {
       zones.networkRegionShapefiles.length - 1
     } shapefiles for NZ network zones`
   );
-  console.log(
-    zones.networkRegionShapefiles[zones.networkRegionShapefiles.length - 1]
-  );
+  let rids = zones.networkRegionShapefiles.map((n) => {
+    return {
+      region: n.region,
+      id: n.id,
+    };
+  });
+  console.log(JSON.stringify(rids, null, 2));
 }, 30000);
 
 test("Load NZTM NRR GeoJSON", async () => {

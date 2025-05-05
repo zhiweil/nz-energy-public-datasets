@@ -79,12 +79,12 @@ export default class NetworkSupplyPointFields extends FieldBase {
         index: 12,
       },
       {
-        field: "networkRportingRegionId",
+        field: "networkReportingRegionId",
         value: "Network reporting region ID",
         index: 13,
       },
       {
-        field: "networkRportingRegion",
+        field: "networkReportingRegion",
         value: "Network reporting region",
         index: 14,
       },

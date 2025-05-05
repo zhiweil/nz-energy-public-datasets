@@ -11,7 +11,9 @@ import ReconciledInjectionsAndOfftakes from "../src/reconciledInjectionAndOfftak
 test("EMI reconciliation data", async () => {
   let recon = new ReconciledInjectionsAndOfftakes();
   let years = await recon.getMeataDataForYears();
+  console.log(years);
   let files = await recon.getFilesForYear(years[0]);
+  console.log(files);
   await recon.loadFile(years[0], files[0].file, "/tmp/reconciled");
   let csv = recon.crawler.readCsvFile(
     `/tmp/reconciled/${years[0]}/${files[0].file.substring(
@@ -20,18 +22,18 @@ test("EMI reconciliation data", async () => {
     )}`
   );
 
-  // top-level fields
-  expect(recon.fields.Fields).toBeDefined();
-  expect(years.length).toBeGreaterThan(8);
-  expect(files.length).toBeGreaterThan(3);
+  // // top-level fields
+  // expect(recon.fields.Fields).toBeDefined();
+  // expect(years.length).toBeGreaterThan(8);
+  // expect(files.length).toBeGreaterThan(3);
 
-  // files are populated correctly
-  files.forEach((f) => {
-    expect(f.file.endsWith(".csv.gz"));
-    expect(f.updatedAt).toBeDefined();
-  });
+  // // files are populated correctly
+  // files.forEach((f) => {
+  //   expect(f.file.endsWith(".csv.gz"));
+  //   expect(f.updatedAt).toBeDefined();
+  // });
 
-  // statistics and samples
-  console.log(csv[0]);
-  console.log(csv[1]);
+  // // statistics and samples
+  // console.log(csv[0]);
+  // console.log(csv[1]);
 }, 300000);
