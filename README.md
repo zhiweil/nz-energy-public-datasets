@@ -78,3 +78,17 @@ let nsps = new NetworkSupplyPoints();
 let files = await nsps.loadFileList();
 let nspsResp = await nsps.loadNetworkSupllyPoints(files[0]);
 ```
+
+# Network Reporting Regions and Zones
+
+The information is hosted on the [Electricity Market Information website](https://www.emi.ea.govt.nz/Wholesale/Datasets/MappingsAndGeospatial/NetworkRegionShapefiles).
+
+To load a list of network reporting regions and zones file to a local directory:
+
+```json
+  let nrs = new NetworkRegionShapefiles();
+  let nrss = await nrs.loadShapefile(
+    NetworkRegionShapeFileType.NZTM_GeoJSON_NRR,
+    "/tmp"
+  );
+```
